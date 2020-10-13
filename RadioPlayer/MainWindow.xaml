@@ -8,6 +8,7 @@
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         mc:Ignorable="d"
         Title="Radio Player" Height="300" Width="600"
+        MinHeight="300" MinWidth="600"
         WindowStartupLocation="CenterScreen">
     <Window.DataContext>
         <vm:ViewModelMainWindow/>
@@ -18,7 +19,7 @@
         </i:EventTrigger>
     </i:Interaction.Triggers>-->
     <DockPanel>
-        <StatusBar DockPanel.Dock="Bottom">
+        <StatusBar DockPanel.Dock="Bottom" Margin="5,0,5,0">
             <StatusBarItem HorizontalAlignment="Right">
                 <TextBlock Text="{Binding Path=Status}"/>
             </StatusBarItem>

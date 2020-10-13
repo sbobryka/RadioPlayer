@@ -61,8 +61,14 @@ namespace RadioPlayer.ViewModels
 
         private void OnRemoveStationExecuted(object property)
         {
-            Stations.Remove(property as Station);
-            SelectedStation = Stations.FirstOrDefault();
+            Station station = (Station)property;
+
+            MessageBoxResult result = MessageBox.Show($"Действительно хотите удалить станцию \"{station.Name}\"?", "Удаление станции", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (result == MessageBoxResult.Yes)
+            {
+                Stations.Remove(station);
+                SelectedStation = Stations.FirstOrDefault();
+            }
         }
 
         private bool CanRemoveStationExecute(object property) => SelectedStation != null;
