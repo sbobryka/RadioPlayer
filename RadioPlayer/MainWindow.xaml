@@ -17,7 +17,7 @@
                 <TextBlock Text="{Binding Path=Status}"/>
             </StatusBarItem>
         </StatusBar>
-        <ListBox DockPanel.Dock="Left" Width="200" ItemsSource="{Binding Path=Stations}" SelectedItem="{Binding Path=SelectedStation, Mode=TwoWay}">
+        <ListBox Margin="0,0,0,5" DockPanel.Dock="Left" Width="200" ItemsSource="{Binding Path=Stations}" SelectedItem="{Binding Path=SelectedStation, Mode=TwoWay}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding Path=Name}"/>
@@ -31,7 +31,9 @@
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                <Button Grid.Column="2" Content="Играть" Margin="5,5,5,5"/>
+                <Button Grid.Column="0" Content="Добавить" Margin="5" Command="{Binding Path=AddStationCommand}"/>
+                <Button Grid.Column="1" Content="Удалить" Margin="5" Command="{Binding Path=RemoveStationCommand}" CommandParameter="{Binding Path=SelectedStation}"/>
+                <Button Grid.Column="2" Content="Играть" Margin="5"/>
             </Grid>
             <Grid DockPanel.Dock="Top">
                 <Grid.ColumnDefinitions>
@@ -44,8 +46,8 @@
                 </Grid.RowDefinitions>
                 <TextBlock Grid.Row="0" Text="Название:" VerticalAlignment="Center" Margin="5"/>
                 <TextBlock Grid.Row="1" Text="Адрес:" VerticalAlignment="Center" Margin="5"/>
-                <TextBox Grid.Row="0" Grid.Column="1" Margin="5" Text="{Binding Path=SelectedStation.Name, Mode=OneWay}"/>
-                <TextBox Grid.Row="1" Grid.Column="1" Margin="5" Text="{Binding Path=SelectedStation.Address, Mode=OneWay}"/>
+                <TextBox Grid.Row="0" Grid.Column="1" Margin="5" Text="{Binding Path=SelectedStation.Name, UpdateSourceTrigger=PropertyChanged}"/>
+                <TextBox Grid.Row="1" Grid.Column="1" Margin="5" Text="{Binding Path=SelectedStation.Address, UpdateSourceTrigger=PropertyChanged}"/>
             </Grid>
         </DockPanel>
     </DockPanel>
