@@ -43,10 +43,7 @@ namespace RadioPlayer.ViewModels
                 new Station("Energy", @"http:\\energy.ru")
             };
 
-            if (Stations.Count > 0)
-            {
-                SelectedStation = Stations.First();
-            }
+            SelectedStation = Stations.FirstOrDefault();
         }
     }
 }

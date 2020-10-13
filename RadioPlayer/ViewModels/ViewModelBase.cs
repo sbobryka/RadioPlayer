@@ -6,11 +6,11 @@ using System.Text;
 
 namespace RadioPlayer.ViewModels
 {
-    internal class ViewModelBase : INotifyPropertyChanged
+    internal abstract class ViewModelBase : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private void OnPropertyChanged([CallerMemberName] string property = null)
+        protected virtual void OnPropertyChanged([CallerMemberName] string property = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
         }
