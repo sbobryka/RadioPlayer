@@ -17,7 +17,7 @@
                 <TextBlock Text="{Binding Path=Status}"/>
             </StatusBarItem>
         </StatusBar>
-        <ListBox DockPanel.Dock="Left" Width="200" ItemsSource="{Binding Path=Stations}">
+        <ListBox DockPanel.Dock="Left" Width="200" ItemsSource="{Binding Path=Stations}" SelectedItem="{Binding Path=SelectedStation, Mode=TwoWay}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding Path=Name}"/>
@@ -44,8 +44,8 @@
                 </Grid.RowDefinitions>
                 <TextBlock Grid.Row="0" Text="Название:" VerticalAlignment="Center" Margin="5"/>
                 <TextBlock Grid.Row="1" Text="Адрес:" VerticalAlignment="Center" Margin="5"/>
-                <TextBox Grid.Row="0" Grid.Column="1" Margin="5" Text="{Binding Path=SelectedStation.Name}"/>
-                <TextBox Grid.Row="1" Grid.Column="1" Margin="5" Text="{Binding Path=SelectedStation.Address}"/>
+                <TextBox Grid.Row="0" Grid.Column="1" Margin="5" Text="{Binding Path=SelectedStation.Name, Mode=OneWay}"/>
+                <TextBox Grid.Row="1" Grid.Column="1" Margin="5" Text="{Binding Path=SelectedStation.Address, Mode=OneWay}"/>
             </Grid>
         </DockPanel>
     </DockPanel>

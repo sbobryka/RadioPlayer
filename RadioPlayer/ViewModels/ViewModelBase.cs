@@ -19,7 +19,7 @@ namespace RadioPlayer.ViewModels
         {
             if (Equals(field, value)) return false;
             field = value;
-            OnPropertyChanged();
+            OnPropertyChanged(property);
             return true;
         }
     }

@@ -1,9 +1,11 @@
-﻿using RadioPlayer.Models;
+﻿using RadioPlayer.Commands;
+using RadioPlayer.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using System.Windows.Input;
 
 namespace RadioPlayer.ViewModels
 {
@@ -30,6 +32,19 @@ namespace RadioPlayer.ViewModels
             get => selectedStation;
             set => Set(ref selectedStation, value);
         }
+
+        #endregion
+
+        #region Команды
+
+        public ICommand TestCommand { get; }
+
+        private void OnTestCommandExecuted(object property)
+        {
+
+        }
+
+        private bool CanTestCommandExecut(object property) => true;
 
         #endregion
 
