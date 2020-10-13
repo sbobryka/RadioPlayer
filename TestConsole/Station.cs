@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace RadioPlayer.Models
+namespace TestConsole
 {
-    internal class Station
+    class Station
     {
         public string Name { get; set; }
         public string Address { get; set; }

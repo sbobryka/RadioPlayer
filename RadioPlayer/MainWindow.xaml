@@ -5,12 +5,18 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RadioPlayer"
         xmlns:vm="clr-namespace:RadioPlayer.ViewModels"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         mc:Ignorable="d"
         Title="Radio Player" Height="300" Width="600"
         WindowStartupLocation="CenterScreen">
     <Window.DataContext>
         <vm:ViewModelMainWindow/>
     </Window.DataContext>
+    <!--<i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding Path=LoadStationsCommand}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>-->
     <DockPanel>
         <StatusBar DockPanel.Dock="Bottom">
             <StatusBarItem HorizontalAlignment="Right">
@@ -30,10 +36,12 @@
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
+                    <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
                 <Button Grid.Column="0" Content="Добавить" Margin="5" Command="{Binding Path=AddStationCommand}"/>
                 <Button Grid.Column="1" Content="Удалить" Margin="5" Command="{Binding Path=RemoveStationCommand}" CommandParameter="{Binding Path=SelectedStation}"/>
-                <Button Grid.Column="2" Content="Играть" Margin="5" Command="{Binding Path=PlayStationCommand}" CommandParameter="{Binding Path=SelectedStation}"/>
+                <Button Grid.Column="2" Content="Сохранить" Margin="5" Command="{Binding Path=SaveStationsCommand}" CommandParameter="{Binding Path=Stations}"/>
+                <Button Grid.Column="3" Content="Играть" Margin="5" Command="{Binding Path=PlayStationCommand}" CommandParameter="{Binding Path=SelectedStation}"/>
             </Grid>
             <Grid DockPanel.Dock="Top">
                 <Grid.ColumnDefinitions>

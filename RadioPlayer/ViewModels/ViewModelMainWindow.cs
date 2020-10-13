@@ -8,12 +8,15 @@ using System.Text;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Text.Json;
+using System.IO;
 
 namespace RadioPlayer.ViewModels
 {
     internal class ViewModelMainWindow : ViewModelBase
     {
         public MediaPlayer MediaPlayer { get; } = new MediaPlayer();
+        private FileInfo fileStations = new FileInfo("Stations.xml");
 
         #region Статус
 
@@ -62,7 +65,42 @@ namespace RadioPlayer.ViewModels
             SelectedStation = Stations.FirstOrDefault();
         }
 
-        private bool CanRemoveStationExecute(object property) => Stations.Count > 0;
+        private bool CanRemoveStationExecute(object property) => SelectedStation != null;
+
+        #endregion
+
+        #region Командa - сохранить
+
+        public ICommand SaveStationsCommand { get; }
+
+        private void OnSaveStationsExecuted(object property)
+        {
+            var json = JsonSerializer.Serialize(property);
+            File.WriteAllText(fileStations.Name, json);
+            Status = "Список станций сохранен";
+        }
+
+        private bool CanSaveStationsExecute(object property) => Stations != null;
+
+        #endregion
+
+        #region Командa - загрузить
+
+        public ICommand LoadStationsCommand { get; }
+
+        private void OnLoadStationsExecuted(object property)
+        {
+            //if (fileStations.Exists)
+            //{
+            //    string json = fileStations.OpenText().ReadToEnd().ToString();
+            //    var stations = JsonSerializer.Deserialize<ObservableCollection<Station>>(json);
+            //    Stations = new ObservableCollection<Station>(stations.OrderBy(s => s.Name));
+            //}
+
+            //Status = "Список станций загружен";
+        }
+
+        private bool CanLoadStationsExecute(object property) => true;
 
         #endregion
 
@@ -97,15 +135,27 @@ namespace RadioPlayer.ViewModels
 
         public ViewModelMainWindow()
         {
-            Stations = new ObservableCollection<Station>()
+            //Stations = new ObservableCollection<Station>()
+            //{
+            //    new Station("Европа Плюс", @"http://ep128.hostingradio.ru:8030/ep128"),
+            //    new Station("DiFM", @"https://dfm.hostingradio.ru/dfm128.mp3"),
+            //};
+
+            //Stations = new ObservableCollection<Station>(Stations.OrderBy(s => s.Name));
+
+            //SelectedStation = Stations.FirstOrDefault();
+
+            if (fileStations.Exists)
             {
-                new Station("Европа Плюс", @"http://ep128.hostingradio.ru:8030/ep128"),
-                new Station("DiFM", @"https://dfm.hostingradio.ru/dfm128.mp3"),
-            };
-
-            Stations = new ObservableCollection<Station>(Stations.OrderBy(s => s.Name));
-
-            SelectedStation = Stations.FirstOrDefault();
+                string json = fileStations.OpenText().ReadToEnd().ToString();
+                var stations = JsonSerializer.Deserialize<ObservableCollection<Station>>(json);
+                Stations = new ObservableCollection<Station>(stations.OrderBy(s => s.Name));
+                Status = "Список станций загружен";
+            }
+            else
+            {
+                Stations = new ObservableCollection<Station>();
+            }
 
             MediaPlayer.MediaFailed += MediaPlayer_MediaFailed;
             MediaPlayer.MediaOpened += MediaPlayer_MediaOpened;
@@ -113,6 +163,8 @@ namespace RadioPlayer.ViewModels
             AddStationCommand = new RelayCommand(OnAddStationExecuted, CanAddStationExecute);
             RemoveStationCommand = new RelayCommand(OnRemoveStationExecuted, CanRemoveStationExecute);
             PlayStationCommand = new RelayCommand(OnPlayStationExecuted, CanPlayStationExecute);
+            SaveStationsCommand = new RelayCommand(OnSaveStationsExecuted, CanSaveStationsExecute);
+            LoadStationsCommand = new RelayCommand(OnLoadStationsExecuted, CanLoadStationsExecute);
         }
 
         #endregion
