@@ -4,19 +4,25 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RadioPlayer"
+        xmlns:vm="clr-namespace:RadioPlayer.ViewModels"
         mc:Ignorable="d"
         Title="Radio Player" Height="300" Width="600"
         WindowStartupLocation="CenterScreen">
+    <Window.DataContext>
+        <vm:ViewModelMainWindow/>
+    </Window.DataContext>
     <DockPanel>
         <StatusBar DockPanel.Dock="Bottom">
             <StatusBarItem HorizontalAlignment="Right">
-                <TextBlock Text="Состояние"/>
+                <TextBlock Text="{Binding Path=Status}"/>
             </StatusBarItem>
         </StatusBar>
-        <ListBox DockPanel.Dock="Left" Width="200">
-            <ListBoxItem Content="Станция 1"/>
-            <ListBoxItem Content="Станция 2"/>
-            <ListBoxItem Content="Станция 3"/>
+        <ListBox DockPanel.Dock="Left" Width="200" ItemsSource="{Binding Path=Stations}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Path=Name}"/>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
         </ListBox>
         <DockPanel>
             <Grid DockPanel.Dock="Bottom" Height="40">
@@ -38,8 +44,8 @@
                 </Grid.RowDefinitions>
                 <TextBlock Grid.Row="0" Text="Название:" VerticalAlignment="Center" Margin="5"/>
                 <TextBlock Grid.Row="1" Text="Адрес:" VerticalAlignment="Center" Margin="5"/>
-                <TextBox Grid.Row="0" Grid.Column="1" Margin="5"/>
-                <TextBox Grid.Row="1" Grid.Column="1" Margin="5"/>
+                <TextBox Grid.Row="0" Grid.Column="1" Margin="5" Text="{Binding Path=SelectedStation.Name}"/>
+                <TextBox Grid.Row="1" Grid.Column="1" Margin="5" Text="{Binding Path=SelectedStation.Address}"/>
             </Grid>
         </DockPanel>
     </DockPanel>
