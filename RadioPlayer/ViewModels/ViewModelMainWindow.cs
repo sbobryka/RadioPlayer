@@ -125,6 +125,20 @@ namespace RadioPlayer.ViewModels
 
         #endregion
 
+        #region Командa - стоп
+
+        public ICommand StopPlayingCommand { get; }
+
+        private void OnStopPlayingExecuted(object property)
+        {
+            MediaPlayer.Stop();
+            Status = "Воспроизведения мультимедиа завершено.";
+        }
+
+        private bool CanStopPlayingExecute(object property) => MediaPlayer != null;
+
+        #endregion
+
         #region Список станций
 
         public ObservableCollection<Station> Stations { get; set; }
@@ -159,12 +173,14 @@ namespace RadioPlayer.ViewModels
 
             MediaPlayer.MediaFailed += MediaPlayer_MediaFailed;
             MediaPlayer.MediaOpened += MediaPlayer_MediaOpened;
+            MediaPlayer.MediaEnded += MediaPlayer_MediaEnded;
 
             AddStationCommand = new RelayCommand(OnAddStationExecuted, CanAddStationExecute);
             RemoveStationCommand = new RelayCommand(OnRemoveStationExecuted, CanRemoveStationExecute);
             PlayStationCommand = new RelayCommand(OnPlayStationExecuted, CanPlayStationExecute);
             SaveStationsCommand = new RelayCommand(OnSaveStationsExecuted, CanSaveStationsExecute);
             LoadStationsCommand = new RelayCommand(OnLoadStationsExecuted, CanLoadStationsExecute);
+            StopPlayingCommand = new RelayCommand(OnStopPlayingExecuted, CanStopPlayingExecute);
         }
 
         #endregion
@@ -179,6 +195,11 @@ namespace RadioPlayer.ViewModels
         private void MediaPlayer_MediaOpened(object sender, EventArgs e)
         {
             Status = "Успешное открытие мультимедиа.";
+        }
+
+        private void MediaPlayer_MediaEnded(object sender, EventArgs e)
+        {
+            Status = "Завершение воспроизведения мультимедиа.";
         }
 
         #endregion

@@ -31,17 +31,22 @@
             </ListBox.ItemTemplate>
         </ListBox>
         <DockPanel>
-            <Grid DockPanel.Dock="Bottom" Height="40">
+            <Grid DockPanel.Dock="Bottom">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                <Button Grid.Column="0" Content="Добавить" Margin="5" Command="{Binding Path=AddStationCommand}"/>
-                <Button Grid.Column="1" Content="Удалить" Margin="5" Command="{Binding Path=RemoveStationCommand}" CommandParameter="{Binding Path=SelectedStation}"/>
-                <Button Grid.Column="2" Content="Сохранить" Margin="5" Command="{Binding Path=SaveStationsCommand}" CommandParameter="{Binding Path=Stations}"/>
-                <Button Grid.Column="3" Content="Играть" Margin="5" Command="{Binding Path=PlayStationCommand}" CommandParameter="{Binding Path=SelectedStation}"/>
+                <Button Height="25" Grid.Column="0" Content="Добавить" Margin="5" Command="{Binding Path=AddStationCommand}"/>
+                <Button Height="25" Grid.Column="1" Content="Удалить" Margin="5" Command="{Binding Path=RemoveStationCommand}" CommandParameter="{Binding Path=SelectedStation}"/>
+                <Button Height="25" Grid.Column="2" Grid.ColumnSpan="2" Content="Сохранить" Margin="5" Command="{Binding Path=SaveStationsCommand}" CommandParameter="{Binding Path=Stations}"/>
+                <Button Height="25" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Content="Стоп" Margin="5" Command="{Binding Path=StopPlayingCommand}"/>
+                <Button Height="25" Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2" Content="Играть" Margin="5" Command="{Binding Path=PlayStationCommand}" CommandParameter="{Binding Path=SelectedStation}"/>
             </Grid>
             <Grid DockPanel.Dock="Top">
                 <Grid.ColumnDefinitions>
