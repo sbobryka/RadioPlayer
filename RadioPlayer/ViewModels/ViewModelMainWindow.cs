@@ -30,6 +30,16 @@ namespace RadioPlayer.ViewModels
 
         #endregion
 
+        #region Громкость
+
+        public double Volume
+        {
+            get => MediaPlayer.Volume;
+            set { MediaPlayer.Volume = value; OnPropertyChanged(); }
+        }
+
+        #endregion
+
         #region Выбранная станция
 
         private Station selectedStation;
