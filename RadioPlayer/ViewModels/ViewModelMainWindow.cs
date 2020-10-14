@@ -42,6 +42,18 @@ namespace RadioPlayer.ViewModels
 
         #region Выбранная станция
 
+        private Station currentStation;
+
+        public Station CurrentStation
+        {
+            get => currentStation;
+            set => Set(ref currentStation, value);
+        }
+
+        #endregion
+
+        #region Текущая станция
+
         private Station selectedStation;
 
         public Station SelectedStation
@@ -128,8 +140,11 @@ namespace RadioPlayer.ViewModels
         {
             try
             {
-                MediaPlayer.Open(new Uri(((Station)property).Address));
+                Station station = property as Station;
+                Status = $"Попытка открытия {station.Address}";
+                MediaPlayer.Open(new Uri(station.Address));
                 MediaPlayer.Play();
+                CurrentStation = station;
             }
             catch (Exception ex)
             {
@@ -210,12 +225,12 @@ namespace RadioPlayer.ViewModels
 
         private void MediaPlayer_MediaOpened(object sender, EventArgs e)
         {
-            Status = "Успешное открытие мультимедиа.";
+            Status = "Успешное открытие мультимедиа";
         }
 
         private void MediaPlayer_MediaEnded(object sender, EventArgs e)
         {
-            Status = "Завершение воспроизведения мультимедиа.";
+            Status = "Завершение воспроизведения мультимедиа";
         }
 
         #endregion

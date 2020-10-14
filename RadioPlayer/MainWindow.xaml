@@ -20,8 +20,11 @@
     </i:Interaction.Triggers>-->
     <DockPanel>
         <StatusBar DockPanel.Dock="Bottom" Height="30">
+            <StatusBarItem HorizontalAlignment="Left">
+                <TextBlock Text="{Binding Path=CurrentStation.Name}" Margin="5,0,0,0"/>
+            </StatusBarItem>
             <StatusBarItem HorizontalAlignment="Right">
-                <TextBlock Text="{Binding Path=Status}" Margin="0,0,5,0"/>
+                <TextBlock Text="{Binding Path=Status}" Margin="0,0,5,0" TextTrimming="CharacterEllipsis"/>
             </StatusBarItem>
         </StatusBar>
         <ListBox Margin="0,0,0,0" DockPanel.Dock="Left" Width="200" ItemsSource="{Binding Path=Stations}" SelectedItem="{Binding Path=SelectedStation, Mode=TwoWay}">
