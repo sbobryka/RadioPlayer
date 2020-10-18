@@ -141,7 +141,7 @@ namespace RadioPlayer.ViewModels
             try
             {
                 Station station = property as Station;
-                Status = $"Попытка открытия {station.Address}";
+                Status = $"Открытие {station.Address}";
                 MediaPlayer.Open(new Uri(station.Address));
                 MediaPlayer.Play();
                 CurrentStation = station;
@@ -202,9 +202,15 @@ namespace RadioPlayer.ViewModels
                 Stations = new ObservableCollection<Station>();
             }
 
+            #region Подписка на события проигрывателя
+
             MediaPlayer.MediaFailed += MediaPlayer_MediaFailed;
             MediaPlayer.MediaOpened += MediaPlayer_MediaOpened;
             MediaPlayer.MediaEnded += MediaPlayer_MediaEnded;
+            MediaPlayer.BufferingStarted += MediaPlayer_BufferingStarted;
+            MediaPlayer.BufferingEnded += MediaPlayer_BufferingEnded;
+
+            #endregion
 
             AddStationCommand = new RelayCommand(OnAddStationExecuted, CanAddStationExecute);
             RemoveStationCommand = new RelayCommand(OnRemoveStationExecuted, CanRemoveStationExecute);
@@ -218,20 +224,20 @@ namespace RadioPlayer.ViewModels
 
         #region События подключения
 
-        private void MediaPlayer_MediaFailed(object sender, ExceptionEventArgs e)
-        {
+        private void MediaPlayer_MediaFailed(object sender, ExceptionEventArgs e)=>
             Status = e.ErrorException.Message;
-        }
 
-        private void MediaPlayer_MediaOpened(object sender, EventArgs e)
-        {
+        private void MediaPlayer_MediaOpened(object sender, EventArgs e) =>
             Status = "Успешное открытие мультимедиа";
-        }
 
-        private void MediaPlayer_MediaEnded(object sender, EventArgs e)
-        {
+        private void MediaPlayer_MediaEnded(object sender, EventArgs e) =>
             Status = "Завершение воспроизведения мультимедиа";
-        }
+
+        private void MediaPlayer_BufferingEnded(object sender, EventArgs e) =>
+            Status = "Начало буфферизации";
+
+        private void MediaPlayer_BufferingStarted(object sender, EventArgs e) =>
+            Status = "Буфферизация завершена";
 
         #endregion
     }
