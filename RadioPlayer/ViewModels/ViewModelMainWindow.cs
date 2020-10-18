@@ -40,7 +40,7 @@ namespace RadioPlayer.ViewModels
 
         #endregion
 
-        #region Выбранная станция
+        #region Текущая станция
 
         private Station currentStation;
 
@@ -52,7 +52,7 @@ namespace RadioPlayer.ViewModels
 
         #endregion
 
-        #region Текущая станция
+        #region Выбранная станция
 
         private Station selectedStation;
 
