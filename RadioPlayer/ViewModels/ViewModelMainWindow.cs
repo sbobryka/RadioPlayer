@@ -70,7 +70,9 @@ namespace RadioPlayer.ViewModels
 
         private void OnAddStationExecuted(object property)
         {
-            Stations.Add(new Station("Новая станция", @"http://"));
+            Station station = new Station("Новая станция", @"http://");
+            Stations.Add(station);
+            SelectedStation = station;
         }
 
         private bool CanAddStationExecute(object property) => true;
@@ -103,9 +105,12 @@ namespace RadioPlayer.ViewModels
 
         private void OnSaveStationsExecuted(object property)
         {
-            var json = JsonSerializer.Serialize(property);
-            File.WriteAllText(fileStations.Name, json);
-            Status = "Список станций сохранен";
+            if (property != null)
+            {
+                var json = JsonSerializer.Serialize(property);
+                File.WriteAllText(fileStations.Name, json);
+                Status = "Список станций сохранен";
+            }
         }
 
         private bool CanSaveStationsExecute(object property) => Stations != null;

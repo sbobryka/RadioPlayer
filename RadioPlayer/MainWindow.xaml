@@ -25,7 +25,7 @@
                 <MenuItem Header="Удалить" Command="{Binding Path=RemoveStationCommand}" CommandParameter="{Binding Path=SelectedStation}"/>
             </MenuItem>
             <MenuItem Header="Список">
-                <MenuItem Header="Сохранить" Command="{Binding Path=SaveStationsCommand}"/>
+                <MenuItem Header="Сохранить" Command="{Binding Path=SaveStationsCommand}" CommandParameter="{Binding Path=Stations}"/>
             </MenuItem>
         </Menu>
         <StatusBar DockPanel.Dock="Bottom" Height="30">
