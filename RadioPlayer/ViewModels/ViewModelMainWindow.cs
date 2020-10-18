@@ -31,11 +31,12 @@ namespace RadioPlayer.ViewModels
         #endregion
 
         #region Громкость
+        private double volume = 0.5;
 
         public double Volume
         {
             get => MediaPlayer.Volume;
-            set { MediaPlayer.Volume = value; OnPropertyChanged(); }
+            set { MediaPlayer.Volume = volume = value; OnPropertyChanged(); }
         }
 
         #endregion
@@ -150,6 +151,7 @@ namespace RadioPlayer.ViewModels
                 MediaPlayer.Close();
                 MediaPlayer.Open(new Uri(station.Address));
                 MediaPlayer.Play();
+                Volume = volume;
                 CurrentStation = station;
             }
             catch (Exception ex)
@@ -214,8 +216,8 @@ namespace RadioPlayer.ViewModels
             MediaPlayer.MediaFailed += MediaPlayer_MediaFailed;
             MediaPlayer.MediaOpened += MediaPlayer_MediaOpened;
             MediaPlayer.MediaEnded += MediaPlayer_MediaEnded;
-            MediaPlayer.BufferingStarted += MediaPlayer_BufferingStarted;
-            MediaPlayer.BufferingEnded += MediaPlayer_BufferingEnded;
+            //MediaPlayer.BufferingStarted += MediaPlayer_BufferingStarted;
+            //MediaPlayer.BufferingEnded += MediaPlayer_BufferingEnded;
 
             #endregion
 
@@ -231,20 +233,15 @@ namespace RadioPlayer.ViewModels
 
         #region События подключения
 
-        private void MediaPlayer_MediaFailed(object sender, ExceptionEventArgs e)=>
-            Status = e.ErrorException.Message;
+        private void MediaPlayer_MediaFailed(object sender, ExceptionEventArgs e) => Status = e.ErrorException.Message;
 
-        private void MediaPlayer_MediaOpened(object sender, EventArgs e) =>
-            Status = "Успешное открытие мультимедиа";
+        private void MediaPlayer_MediaOpened(object sender, EventArgs e) => Status = "Успешное открытие мультимедиа";
 
-        private void MediaPlayer_MediaEnded(object sender, EventArgs e) =>
-            Status = "Завершение воспроизведения мультимедиа";
+        private void MediaPlayer_MediaEnded(object sender, EventArgs e) => Status = "Завершение воспроизведения мультимедиа";
 
-        private void MediaPlayer_BufferingEnded(object sender, EventArgs e) =>
-            Status = "Начало буфферизации";
+        //private void MediaPlayer_BufferingEnded(object sender, EventArgs e) => Status = "Начало буфферизации";
 
-        private void MediaPlayer_BufferingStarted(object sender, EventArgs e) =>
-            Status = "Буфферизация завершена";
+        //private void MediaPlayer_BufferingStarted(object sender, EventArgs e) => Status = "Буфферизация завершена";
 
         #endregion
     }
