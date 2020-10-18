@@ -142,6 +142,7 @@ namespace RadioPlayer.ViewModels
             {
                 Station station = property as Station;
                 Status = $"Открытие {station.Address}";
+                MediaPlayer.Close();
                 MediaPlayer.Open(new Uri(station.Address));
                 MediaPlayer.Play();
                 CurrentStation = station;
@@ -163,6 +164,7 @@ namespace RadioPlayer.ViewModels
         private void OnStopPlayingExecuted(object property)
         {
             MediaPlayer.Stop();
+            MediaPlayer.Close();
             Status = "Воспроизведения мультимедиа завершено.";
         }
 
