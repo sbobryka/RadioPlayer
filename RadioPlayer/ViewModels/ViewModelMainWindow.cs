@@ -16,7 +16,7 @@ namespace RadioPlayer.ViewModels
     internal class ViewModelMainWindow : ViewModelBase
     {
         public MediaPlayer MediaPlayer { get; } = new MediaPlayer();
-        private FileInfo fileStations = new FileInfo("Stations.xml");
+        private FileInfo fileStations = new FileInfo("Stations.dat");
 
         #region Статус
 
