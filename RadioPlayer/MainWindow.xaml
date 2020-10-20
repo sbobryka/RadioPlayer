@@ -36,64 +36,71 @@
                 <TextBlock Text="{Binding Path=Status}" Margin="0,0,5,0" TextTrimming="CharacterEllipsis"/>
             </StatusBarItem>
         </StatusBar>
-        <ListBox Margin="5,5,0,5" DockPanel.Dock="Left" Width="200" ItemsSource="{Binding Path=Stations}" SelectedItem="{Binding Path=SelectedStation, Mode=TwoWay}">
-            <ListBox.ItemContainerStyle>
-                <Style TargetType="ListBoxItem">
-                    <Setter Property="Height" Value="30"/>
-                </Style>
-            </ListBox.ItemContainerStyle>
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <TextBlock Text="{Binding Path=Name}"/>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
-        <DockPanel LastChildFill="False">
-            <Grid DockPanel.Dock="Top" Margin="5">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="auto"/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition Height="5"/>
-                    <RowDefinition/>
-                </Grid.RowDefinitions>
-                <TextBlock Grid.Row="0" Text="Название:" VerticalAlignment="Center"/>
-                <TextBlock Grid.Row="2" Text="Адрес:" VerticalAlignment="Center"/>
-                <TextBox VerticalContentAlignment="Center" Height="30" Grid.Row="0" Grid.Column="1" Margin="5,0,0,0" Text="{Binding Path=SelectedStation.Name, UpdateSourceTrigger=PropertyChanged}"/>
-                <TextBox VerticalContentAlignment="Center" Height="30" Grid.Row="2" Grid.Column="1" Margin="5,0,0,0" Text="{Binding Path=SelectedStation.Address, UpdateSourceTrigger=PropertyChanged}"/>
-            </Grid>
-            <Grid DockPanel.Dock="Bottom">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="0"/>
-                    <RowDefinition/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
-                <Button Height="30" Grid.Column="0" Content="Добавить" Margin="5" Command="{Binding Path=AddStationCommand}"/>
-                <Button Height="30" Grid.Column="1" Content="Удалить" Margin="5" Command="{Binding Path=RemoveStationCommand}" CommandParameter="{Binding Path=SelectedStation}"/>
-                <Button Height="30" Grid.Column="2" Grid.ColumnSpan="2" Content="Сохранить" Margin="5" Command="{Binding Path=SaveStationsCommand}" CommandParameter="{Binding Path=Stations}"/>
-                <Button Height="30" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Content="Стоп" Margin="5" Command="{Binding Path=StopPlayingCommand}"/>
-                <Button Height="30" Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2" Content="Играть" Margin="5" Command="{Binding Path=PlayStationCommand}" CommandParameter="{Binding Path=SelectedStation}"/>
-            </Grid>
-            <Grid DockPanel.Dock="Bottom">
-                <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
-                <TextBlock Grid.Row="0" Text="Громкость" Margin="5,0,0,0"/>
-                <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding Path=Volume, StringFormat={}{0:P0}}" HorizontalAlignment="Right" Margin="0,0,5,0"/>
-                <ScrollBar Grid.ColumnSpan="2" Grid.Row="1" Minimum="0" Maximum="1" Orientation="Horizontal" Margin="5" Value="{Binding Path=Volume}" ViewportSize="0.1" LargeChange="0.1"/>
-            </Grid>
-        </DockPanel>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200" MaxWidth="400" MinWidth="200"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <ListBox Grid.Column="0" Margin="5,5,7,5" DockPanel.Dock="Left" ItemsSource="{Binding Path=Stations}" SelectedItem="{Binding Path=SelectedStation, Mode=TwoWay}">
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="ListBoxItem">
+                        <Setter Property="Height" Value="30"/>
+                    </Style>
+                </ListBox.ItemContainerStyle>
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Path=Name}"/>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+            <GridSplitter Width="2" ResizeDirection="Columns"></GridSplitter>
+            <DockPanel Grid.Column="1" LastChildFill="False">
+                <Grid DockPanel.Dock="Top" Margin="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition Height="5"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0" Text="Название:" VerticalAlignment="Center"/>
+                    <TextBlock Grid.Row="2" Text="Адрес:" VerticalAlignment="Center"/>
+                    <TextBox VerticalContentAlignment="Center" Height="30" Grid.Row="0" Grid.Column="1" Margin="5,0,0,0" Text="{Binding Path=SelectedStation.Name, UpdateSourceTrigger=PropertyChanged}"/>
+                    <TextBox VerticalContentAlignment="Center" Height="30" Grid.Row="2" Grid.Column="1" Margin="5,0,0,0" Text="{Binding Path=SelectedStation.Address, UpdateSourceTrigger=PropertyChanged}"/>
+                </Grid>
+                <Grid DockPanel.Dock="Bottom">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Button Height="30" Grid.Column="0" Content="Добавить" Margin="5" Command="{Binding Path=AddStationCommand}"/>
+                    <Button Height="30" Grid.Column="1" Content="Удалить" Margin="5" Command="{Binding Path=RemoveStationCommand}" CommandParameter="{Binding Path=SelectedStation}"/>
+                    <Button Height="30" Grid.Column="2" Grid.ColumnSpan="2" Content="Сохранить" Margin="5" Command="{Binding Path=SaveStationsCommand}" CommandParameter="{Binding Path=Stations}"/>
+                    <Button Height="30" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Content="Стоп" Margin="5" Command="{Binding Path=StopPlayingCommand}"/>
+                    <Button Height="30" Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2" Content="Играть" Margin="5" Command="{Binding Path=PlayStationCommand}" CommandParameter="{Binding Path=SelectedStation}"/>
+                </Grid>
+                <Grid DockPanel.Dock="Bottom">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Row="0" Text="Громкость" Margin="5,0,0,0"/>
+                    <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding Path=Volume, StringFormat={}{0:P0}}" HorizontalAlignment="Right" Margin="0,0,5,0"/>
+                    <ScrollBar Grid.ColumnSpan="2" Grid.Row="1" Minimum="0" Maximum="1" Orientation="Horizontal" Margin="5" Value="{Binding Path=Volume}" ViewportSize="0.1" LargeChange="0.1"/>
+                </Grid>
+            </DockPanel>
+        </Grid>
     </DockPanel>
 </Window>
