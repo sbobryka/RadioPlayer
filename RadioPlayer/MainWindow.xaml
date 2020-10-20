@@ -21,11 +21,11 @@
     <DockPanel>
         <Menu DockPanel.Dock="Top" Height="30">
             <MenuItem Header="Станция" Height="30">
-                <MenuItem Header="Добавить" Command="{Binding Path=AddStationCommand}"/>
-                <MenuItem Header="Удалить" Command="{Binding Path=RemoveStationCommand}" CommandParameter="{Binding Path=SelectedStation}"/>
+                <MenuItem Header="Добавить" Command="{Binding Path=AddStationCommand}" Height="30"/>
+                <MenuItem Header="Удалить" Command="{Binding Path=RemoveStationCommand}" CommandParameter="{Binding Path=SelectedStation}" Height="30"/>
             </MenuItem>
             <MenuItem Header="Список">
-                <MenuItem Header="Сохранить" Command="{Binding Path=SaveStationsCommand}" CommandParameter="{Binding Path=Stations}"/>
+                <MenuItem Header="Сохранить" Command="{Binding Path=SaveStationsCommand}" CommandParameter="{Binding Path=Stations}" Height="30"/>
             </MenuItem>
         </Menu>
         <StatusBar DockPanel.Dock="Bottom" Height="30">
@@ -37,6 +37,11 @@
             </StatusBarItem>
         </StatusBar>
         <ListBox Margin="5,5,0,5" DockPanel.Dock="Left" Width="200" ItemsSource="{Binding Path=Stations}" SelectedItem="{Binding Path=SelectedStation, Mode=TwoWay}">
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="ListBoxItem">
+                    <Setter Property="Height" Value="30"/>
+                </Style>
+            </ListBox.ItemContainerStyle>
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding Path=Name}"/>

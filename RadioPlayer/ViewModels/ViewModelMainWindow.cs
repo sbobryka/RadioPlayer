@@ -189,6 +189,8 @@ namespace RadioPlayer.ViewModels
 
         public ViewModelMainWindow()
         {
+            #region Тестовые данные для списка станций
+
             //Stations = new ObservableCollection<Station>()
             //{
             //    new Station("Европа Плюс", @"http://ep128.hostingradio.ru:8030/ep128"),
@@ -198,6 +200,8 @@ namespace RadioPlayer.ViewModels
             //Stations = new ObservableCollection<Station>(Stations.OrderBy(s => s.Name));
 
             //SelectedStation = Stations.FirstOrDefault();
+
+            #endregion
 
             if (fileStations.Exists)
             {
