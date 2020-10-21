@@ -41,15 +41,18 @@
                 <ColumnDefinition Width="200" MaxWidth="400" MinWidth="200"/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <ListBox Grid.Column="0" Margin="5,5,7,5" DockPanel.Dock="Left" ItemsSource="{Binding Path=Stations}" SelectedItem="{Binding Path=SelectedStation, Mode=TwoWay}">
+            <ListBox Grid.Column="0" Margin="5,5,7,5" DockPanel.Dock="Left" ItemsSource="{Binding Path=Stations}" SelectedItem="{Binding Path=SelectedStation, Mode=TwoWay}" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
                 <ListBox.ItemContainerStyle>
                     <Style TargetType="ListBoxItem">
-                        <Setter Property="Height" Value="30"/>
+                        <Setter Property="Height" Value="35"/>
                     </Style>
                 </ListBox.ItemContainerStyle>
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <TextBlock Text="{Binding Path=Name}"/>
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock Text="{Binding Path=Name}" TextTrimming="CharacterEllipsis"/>
+                            <TextBlock Text="{Binding Path=Address}" FontSize="10" Foreground="Gray" TextTrimming="CharacterEllipsis"/>
+                        </StackPanel>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
