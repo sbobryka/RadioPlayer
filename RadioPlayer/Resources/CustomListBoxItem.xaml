@@ -10,12 +10,12 @@
             </Setter.Value>
         </Setter>
     </Style>
-    <SolidColorBrush x:Key="Item.MouseOver.Background" Color="#19008000"/>
-    <SolidColorBrush x:Key="Item.MouseOver.Border" Color="#7F008000"/>
-    <SolidColorBrush x:Key="Item.SelectedActive.Background" Color="#3F008000"/>
-    <SolidColorBrush x:Key="Item.SelectedActive.Border" Color="Green"/>
-    <SolidColorBrush x:Key="Item.SelectedInactive.Background" Color="#3DDADADA"/>
-    <SolidColorBrush x:Key="Item.SelectedInactive.Border" Color="#FFDADADA"/>
+    <SolidColorBrush x:Key="Item.MouseOver.Background" Color="SaddleBrown" Opacity="0.1"/>
+    <SolidColorBrush x:Key="Item.MouseOver.Border" Color="SaddleBrown" Opacity="0.5"/>
+    <SolidColorBrush x:Key="Item.SelectedActive.Background" Color="SaddleBrown" Opacity="0.25"/>
+    <SolidColorBrush x:Key="Item.SelectedActive.Border" Color="SaddleBrown"/>
+    <SolidColorBrush x:Key="Item.SelectedInactive.Background" Color="SaddleBrown" Opacity="0.1"/>
+    <SolidColorBrush x:Key="Item.SelectedInactive.Border" Color="SaddleBrown" Opacity="0.5"/>
     <Style x:Key="CustomListBoxItemStyle" TargetType="{x:Type ListBoxItem}">
         <Setter Property="SnapsToDevicePixels" Value="True"/>
         <Setter Property="Padding" Value="4,1"/>

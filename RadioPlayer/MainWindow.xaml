@@ -41,7 +41,7 @@
                 <ColumnDefinition Width="200" MaxWidth="400" MinWidth="200"/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <ListBox Grid.Column="0" Margin="5,5,7,5" DockPanel.Dock="Left" ItemsSource="{Binding Path=Stations}" SelectedItem="{Binding Path=SelectedStation, Mode=TwoWay}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectedIndex="0" ItemContainerStyle="{StaticResource CustomListBoxItemStyle}">
+            <ListBox Grid.Column="0" Margin="5,5,7,5" DockPanel.Dock="Left" ItemsSource="{Binding Path=Stations}" SelectedItem="{Binding Path=SelectedStation, Mode=TwoWay}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectedIndex="0" ItemContainerStyle="{StaticResource CustomListBoxItemStyle}" Style="{StaticResource CustomListBoxStyle}" Foreground="SaddleBrown" FontWeight="DemiBold">
                 <!--<ListBox.ItemContainerStyle>
                     <Style TargetType="ListBoxItem">
                         <Setter Property="Height" Value="35"/>
