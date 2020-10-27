@@ -18,6 +18,18 @@ namespace RadioPlayer.ViewModels
         public MediaPlayer MediaPlayer { get; } = new MediaPlayer();
         private FileInfo fileStations = new FileInfo("Stations.dat");
 
+        #region Флаг Играет
+
+        private bool isPlayed = false;
+
+        public bool IsPlayed
+        {
+            get => isPlayed;
+            set => Set(ref isPlayed, value);
+        }
+
+        #endregion
+
         #region Статус
 
         private string status = "Готов";
@@ -153,6 +165,7 @@ namespace RadioPlayer.ViewModels
                 MediaPlayer.Play();
                 Volume = volume;
                 CurrentStation = station;
+                IsPlayed = true;
             }
             catch (Exception ex)
             {
@@ -173,6 +186,7 @@ namespace RadioPlayer.ViewModels
             MediaPlayer.Stop();
             MediaPlayer.Close();
             Status = "Воспроизведения мультимедиа завершено.";
+            IsPlayed = false;
         }
 
         private bool CanStopPlayingExecute(object property) => MediaPlayer != null;
@@ -237,11 +251,21 @@ namespace RadioPlayer.ViewModels
 
         #region События подключения
 
-        private void MediaPlayer_MediaFailed(object sender, ExceptionEventArgs e) => Status = e.ErrorException.Message;
+        private void MediaPlayer_MediaFailed(object sender, ExceptionEventArgs e)
+        {
+            Status = e.ErrorException.Message;
+            if (IsPlayed)
+                PlayStationCommand?.Execute(CurrentStation);
+        }
 
         private void MediaPlayer_MediaOpened(object sender, EventArgs e) => Status = "Успешное открытие мультимедиа";
 
-        private void MediaPlayer_MediaEnded(object sender, EventArgs e) => Status = "Завершение воспроизведения мультимедиа";
+        private void MediaPlayer_MediaEnded(object sender, EventArgs e)
+        {
+            Status = "Завершение воспроизведения мультимедиа";
+            if (IsPlayed)
+                PlayStationCommand?.Execute(CurrentStation);
+        }
 
         //private void MediaPlayer_BufferingEnded(object sender, EventArgs e) => Status = "Начало буфферизации";
 
