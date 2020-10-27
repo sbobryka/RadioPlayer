@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30517.126
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RadioPlayer", "RadioPlayer\RadioPlayer.csproj", "{8802FF8E-7BA6-4FF9-BE20-91CFA261F57D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RadioPlayer", "RadioPlayer\RadioPlayer.csproj", "{8802FF8E-7BA6-4FF9-BE20-91CFA261F57D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestConsole", "TestConsole\TestConsole.csproj", "{0384B70D-7CBC-4077-BB63-D889B0941FED}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestConsole", "TestConsole\TestConsole.csproj", "{0384B70D-7CBC-4077-BB63-D889B0941FED}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestWpfApp", "TestWpfApp\TestWpfApp.csproj", "{854B7255-8813-4AE7-B1CA-6C312A4FBC03}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{0384B70D-7CBC-4077-BB63-D889B0941FED}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0384B70D-7CBC-4077-BB63-D889B0941FED}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0384B70D-7CBC-4077-BB63-D889B0941FED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{854B7255-8813-4AE7-B1CA-6C312A4FBC03}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{854B7255-8813-4AE7-B1CA-6C312A4FBC03}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{854B7255-8813-4AE7-B1CA-6C312A4FBC03}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{854B7255-8813-4AE7-B1CA-6C312A4FBC03}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
