@@ -7,7 +7,7 @@ using System.Text.Json;
 
 namespace RadioPlayer.Controllers
 {
-    internal class StationsController
+    public class StationsController
     {
         public string FileName { get; }
 
@@ -19,7 +19,7 @@ namespace RadioPlayer.Controllers
         public bool SaveToFile(IEnumerable<Station> stations)
         {
             string json = JsonSerializer.Serialize(stations);
-            File.WriteAllText(FileName, json);
+            File.WriteAllText(FileName, json, Encoding.Default);
             return true;
         }
     }
