@@ -7,8 +7,8 @@
         xmlns:vm="clr-namespace:RadioPlayer.ViewModels"
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         mc:Ignorable="d"
-        Title="Radio Player" Height="480" Width="640"
-        MinHeight="300" MinWidth="600"
+        Title="Radio Player" Height="600" Width="400"
+        MinHeight="600" MinWidth="500"
         WindowStartupLocation="CenterScreen">
     <Window.DataContext>
         <vm:ViewModelMainWindow/>
@@ -19,6 +19,7 @@
         </i:EventTrigger>
     </i:Interaction.Triggers>-->
     <DockPanel>
+
         <Menu DockPanel.Dock="Top" Height="30">
             <MenuItem Header="Станция" Height="30">
                 <MenuItem Header="Добавить" Command="{Binding Path=AddStationCommand}" Height="30"/>
@@ -28,6 +29,7 @@
                 <MenuItem Header="Сохранить" Command="{Binding Path=SaveStationsCommand}" CommandParameter="{Binding Path=Stations}" Height="30"/>
             </MenuItem>
         </Menu>
+
         <StatusBar DockPanel.Dock="Bottom" Height="30">
             <StatusBarItem HorizontalAlignment="Left">
                 <TextBlock Text="{Binding Path=CurrentStation.Name,FallbackValue='Текущая станция'}" Margin="5,0,0,0"/>
@@ -37,11 +39,14 @@
             </StatusBarItem>
         </StatusBar>
         <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="200" MaxWidth="400" MinWidth="250"/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-            <ListBox Grid.Column="0" Margin="5,5,7,5" DockPanel.Dock="Left" ItemsSource="{Binding Path=Stations}" SelectedItem="{Binding Path=SelectedStation, Mode=TwoWay}" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="300"/>
+                <RowDefinition Height="100"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+            </Grid.RowDefinitions>
+
+            <ListBox Grid.Column="0" Grid.ColumnSpan="2" Margin="5,5,7,5" DockPanel.Dock="Left" ItemsSource="{Binding Path=Stations}" SelectedItem="{Binding Path=SelectedStation, Mode=TwoWay}" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
                 <ListBox.ItemContainerStyle>
                     <Style TargetType="ListBoxItem">
                         <Setter Property="Height" Value="35"/>
@@ -56,49 +61,46 @@
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
-            <GridSplitter Width="2" ResizeDirection="Columns"></GridSplitter>
-            <DockPanel Grid.Column="1" LastChildFill="False">
-                <Grid DockPanel.Dock="Top" Margin="5">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="auto"/>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition/>
-                        <RowDefinition Height="5"/>
-                        <RowDefinition/>
-                    </Grid.RowDefinitions>
-                    <TextBlock Grid.Row="0" Text="Название:" VerticalAlignment="Center"/>
-                    <TextBlock Grid.Row="2" Text="Адрес:" VerticalAlignment="Center"/>
-                    <TextBox VerticalContentAlignment="Center" Height="30" Grid.Row="0" Grid.Column="1" Margin="5,0,0,0" Text="{Binding Path=SelectedStation.Name, UpdateSourceTrigger=PropertyChanged}"/>
-                    <TextBox VerticalContentAlignment="Center" Height="30" Grid.Row="2" Grid.Column="1" Margin="5,0,0,0" Text="{Binding Path=SelectedStation.Address, UpdateSourceTrigger=PropertyChanged}"/>
-                </Grid>
-                <Grid DockPanel.Dock="Bottom">
-                    <Grid.RowDefinitions>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
-                    <Button Height="30" Grid.Column="0" Content="Стоп" Margin="5" Command="{Binding Path=StopPlayingCommand}"/>
-                    <Button Height="30" Grid.Column="1" Content="Играть" Margin="5" Command="{Binding Path=PlayStationCommand}" CommandParameter="{Binding Path=SelectedStation}"/>
-                </Grid>
-                <Grid DockPanel.Dock="Bottom">
-                    <Grid.RowDefinitions>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
-                    <TextBlock Grid.Row="0" Text="Громкость" Margin="5,0,0,0"/>
-                    <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding Path=Volume, StringFormat={}{0:P0}}" HorizontalAlignment="Right" Margin="0,0,5,0"/>
-                    <ScrollBar Grid.ColumnSpan="2" Grid.Row="1" Minimum="0" Maximum="1" Orientation="Horizontal" Margin="5" Value="{Binding Path=Volume}" ViewportSize="0.1" LargeChange="0.1"/>
-                </Grid>
-            </DockPanel>
+
+            <Grid Grid.Row="1" Grid.ColumnSpan="2" Margin="5,0,5,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="70"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row="0" Text="Название:" VerticalAlignment="Center" Margin="5"/>
+                <TextBlock Grid.Row="1" Text="Адрес:" VerticalAlignment="Center" Margin="5"/>
+                <TextBox VerticalContentAlignment="Center" Height="30" Grid.Row="0" Grid.Column="1" Margin="5" Text="{Binding Path=SelectedStation.Name, UpdateSourceTrigger=PropertyChanged}"/>
+                <TextBox VerticalContentAlignment="Center" Height="30" Grid.Row="1" Grid.Column="1" Margin="5" Text="{Binding Path=SelectedStation.Address, UpdateSourceTrigger=PropertyChanged}"/>
+            </Grid>
+
+            <Grid Grid.Row="2" Margin="5,0,5,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Row="0" Text="Громкость" Margin="5"/>
+                <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding Path=Volume, StringFormat={}{0:P0}}" HorizontalAlignment="Right" Margin="5"/>
+                <ScrollBar Grid.ColumnSpan="2" Grid.Row="1" Minimum="0" Maximum="1" Orientation="Horizontal" Margin="5" Value="{Binding Path=Volume}" ViewportSize="0.1" LargeChange="0.1"/>
+            </Grid>
+
+            <Grid Grid.Row="3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Button Height="30" Grid.Column="0" Content="Стоп" Margin="5" Command="{Binding Path=StopPlayingCommand}"/>
+                <Button Height="30" Grid.Column="1" Content="Играть" Margin="5" Command="{Binding Path=PlayStationCommand}" CommandParameter="{Binding Path=SelectedStation}"/>
+            </Grid>
+
         </Grid>
+
     </DockPanel>
 </Window>
