@@ -22,5 +22,12 @@ namespace RadioPlayer.Controllers
             File.WriteAllText(FileName, json, Encoding.Default);
             return true;
         }
+
+        public List<Station> LoadFromFile()
+        {
+            string json = File.ReadAllText(FileName, Encoding.Default);
+            List<Station> stations = JsonSerializer.Deserialize<List<Station>>(json);
+            return stations;
+        }
     }
 }

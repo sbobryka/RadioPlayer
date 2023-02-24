@@ -10,13 +10,14 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Text.Json;
 using System.IO;
+using RadioPlayer.Controllers;
 
 namespace RadioPlayer.ViewModels
 {
     internal class ViewModelMainWindow : ViewModelBase
     {
         public MediaPlayer MediaPlayer { get; } = new MediaPlayer();
-        private FileInfo fileStations = new FileInfo("Stations.dat");
+        private StationsController stationsController = new StationsController();
 
         #region Флаг Играет
 
@@ -120,8 +121,8 @@ namespace RadioPlayer.ViewModels
         {
             if (property != null)
             {
-                var json = JsonSerializer.Serialize(property);
-                File.WriteAllText(fileStations.Name, json);
+                IEnumerable<Station> stations = (IEnumerable<Station>)property;
+                stationsController.SaveToFile(stations);
                 Status = "Список станций сохранен";
             }
         }
@@ -217,10 +218,9 @@ namespace RadioPlayer.ViewModels
 
             #endregion
 
-            if (fileStations.Exists)
+            if (File.Exists(stationsController.FileName))
             {
-                string json = fileStations.OpenText().ReadToEnd().ToString();
-                var stations = JsonSerializer.Deserialize<ObservableCollection<Station>>(json);
+                var stations = stationsController.LoadFromFile();
                 Stations = new ObservableCollection<Station>(stations.OrderBy(s => s.Name));
                 Status = "Список станций загружен";
             }

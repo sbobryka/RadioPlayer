@@ -23,5 +23,15 @@ namespace RadioPlayerTests.ControllersTests
 
             Assert.IsTrue(result);
         }
+
+        [TestMethod]
+        public void LoadFromFileTest()
+        {
+            StationsController stationsController = new StationsController();
+
+            List<Station> stations = stationsController.LoadFromFile();
+
+            Assert.IsNotNull(stations);
+        }
     }
 }
