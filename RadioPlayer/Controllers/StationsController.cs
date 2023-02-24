@@ -7,7 +7,7 @@ using System.Text.Json;
 
 namespace RadioPlayer.Controllers
 {
-    public class StationsController
+    internal class StationsController
     {
         public string FileName { get; }
 

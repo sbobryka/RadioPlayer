@@ -7,7 +7,7 @@
         xmlns:vm="clr-namespace:RadioPlayer.ViewModels"
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         mc:Ignorable="d"
-        Title="Radio Player" Height="300" Width="600"
+        Title="Radio Player" Height="480" Width="640"
         MinHeight="300" MinWidth="600"
         WindowStartupLocation="CenterScreen">
     <Window.DataContext>
@@ -38,7 +38,7 @@
         </StatusBar>
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="200" MaxWidth="400" MinWidth="200"/>
+                <ColumnDefinition Width="200" MaxWidth="400" MinWidth="250"/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <ListBox Grid.Column="0" Margin="5,5,7,5" DockPanel.Dock="Left" ItemsSource="{Binding Path=Stations}" SelectedItem="{Binding Path=SelectedStation, Mode=TwoWay}" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
@@ -75,20 +75,15 @@
                 </Grid>
                 <Grid DockPanel.Dock="Bottom">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="0"/>
+                        <RowDefinition/>
                         <RowDefinition/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
                         <ColumnDefinition/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
-                    <Button Height="30" Grid.Column="0" Content="Добавить" Margin="5" Command="{Binding Path=AddStationCommand}"/>
-                    <Button Height="30" Grid.Column="1" Content="Удалить" Margin="5" Command="{Binding Path=RemoveStationCommand}" CommandParameter="{Binding Path=SelectedStation}"/>
-                    <Button Height="30" Grid.Column="2" Grid.ColumnSpan="2" Content="Сохранить" Margin="5" Command="{Binding Path=SaveStationsCommand}" CommandParameter="{Binding Path=Stations}"/>
-                    <Button Height="30" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Content="Стоп" Margin="5" Command="{Binding Path=StopPlayingCommand}"/>
-                    <Button Height="30" Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2" Content="Играть" Margin="5" Command="{Binding Path=PlayStationCommand}" CommandParameter="{Binding Path=SelectedStation}"/>
+                    <Button Height="30" Grid.Column="0" Content="Стоп" Margin="5" Command="{Binding Path=StopPlayingCommand}"/>
+                    <Button Height="30" Grid.Column="1" Content="Играть" Margin="5" Command="{Binding Path=PlayStationCommand}" CommandParameter="{Binding Path=SelectedStation}"/>
                 </Grid>
                 <Grid DockPanel.Dock="Bottom">
                     <Grid.RowDefinitions>
