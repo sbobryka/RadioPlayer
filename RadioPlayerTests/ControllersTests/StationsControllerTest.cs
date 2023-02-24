@@ -2,6 +2,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RadioPlayer.Controllers;
 using RadioPlayer.Models;
 using System.Collections.Generic;
+using System.IO;
 
 namespace RadioPlayerTests.ControllersTests
 {
@@ -19,9 +20,9 @@ namespace RadioPlayerTests.ControllersTests
             };
             StationsController stationsController = new StationsController();
 
-            bool result = stationsController.SaveToFile(stations);
+            stationsController.SaveToFile(stations);
 
-            Assert.IsTrue(result);
+            Assert.IsTrue(File.Exists(stationsController.FileName));
         }
 
         [TestMethod]
@@ -31,7 +32,7 @@ namespace RadioPlayerTests.ControllersTests
 
             List<Station> stations = stationsController.LoadFromFile();
 
-            Assert.IsNotNull(stations);
+            Assert.IsTrue(stations.Count == 3);
         }
     }
 }
