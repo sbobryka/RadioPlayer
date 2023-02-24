@@ -234,8 +234,8 @@ namespace RadioPlayer.ViewModels
             MediaPlayer.MediaFailed += MediaPlayer_MediaFailed;
             MediaPlayer.MediaOpened += MediaPlayer_MediaOpened;
             MediaPlayer.MediaEnded += MediaPlayer_MediaEnded;
-            //MediaPlayer.BufferingStarted += MediaPlayer_BufferingStarted;
-            //MediaPlayer.BufferingEnded += MediaPlayer_BufferingEnded;
+            MediaPlayer.BufferingStarted += MediaPlayer_BufferingStarted;
+            MediaPlayer.BufferingEnded += MediaPlayer_BufferingEnded;
 
             #endregion
 
@@ -267,9 +267,9 @@ namespace RadioPlayer.ViewModels
                 PlayStationCommand?.Execute(CurrentStation);
         }
 
-        //private void MediaPlayer_BufferingEnded(object sender, EventArgs e) => Status = "Начало буфферизации";
+        private void MediaPlayer_BufferingEnded(object sender, EventArgs e) => Status = "Начало буфферизации";
 
-        //private void MediaPlayer_BufferingStarted(object sender, EventArgs e) => Status = "Буфферизация завершена";
+        private void MediaPlayer_BufferingStarted(object sender, EventArgs e) => Status = "Буфферизация завершена";
 
         #endregion
     }
